@@ -7,6 +7,8 @@ import {
 import { getBagsInWallet } from 'loot-sdk';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import dragonJson from './dragon_ids.json';
+
 const api = async (req: NextApiRequest, res: NextApiResponse) => {
   const { code, state }: { code?: string; state?: string } = req.query;
   if (!code || !state) return res.redirect('/unauthorized');
@@ -19,10 +21,18 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!user) return res.redirect('/unauthorized');
 
   // reconfirm user has permissions
+  // todo: filter on id using dragons_ids.json
   const bags = await getBagsInWallet(user.address.toLowerCase());
-  const filteredBags = bags.filter(bag =>
-    bag.chest.toLowerCase().includes('divine robe')
-  );
+  const filteredBags = bags.filter(bag => {
+    // if (dragonJson.hasOwnProperty(bag.id)) return true
+    const bagId = bag.id;
+    for (let loot of dragonJson) {
+      if (loot[bagId]) {
+        return true
+      } 
+    }
+    return false
+  });
   if (!filteredBags.length) return res.redirect('/unauthorized');
 
   await prisma.user.update({

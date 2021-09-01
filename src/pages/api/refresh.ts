@@ -38,7 +38,7 @@ const api: NextApiHandler = async (_req, res) => {
     if (filteredBags.length == 0) {
       await prisma.user.update({
         where: { id: user.id },
-        data: { lastChecked: new Date(), inServer: false, robes: [] },
+        data: { lastChecked: new Date(), inServer: false, items: [] },
       });
       try {
         console.log(`Removing ${user.username} from server`);

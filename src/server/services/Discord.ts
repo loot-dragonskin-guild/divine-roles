@@ -136,6 +136,8 @@ export const removeRoleForUser = async (roleId: string, userID: string) => {
   ).then((res) => res.text());
 };
 
-export const RolesToIDs: Record<string, string> = {};
+export const RolesToIDs: Record<string, string> = {
+  "Ser Dragon of The Round Table": `${process.env.DISCORD_ROLE_SER_DRAGON_OF_THE_ROUND_TABLE}`,
+};
 
-export const AdminRoleID = "881277625820127232";
+export const AdminRoleID = `${process.env.DISCORD_ROLE_ADMIN}`;

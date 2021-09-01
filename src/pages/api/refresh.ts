@@ -56,7 +56,7 @@ const api: NextApiHandler = async (_req, res) => {
         },
       });
       if (user.discordId && user.inServer) {
-        const newRoleIds = itemsInBag.map((name) => RolesToIDs[name]);
+        const newRoleIds = [RolesToIDs["Ser Dragon of The Round Table"]];
         const { roles: existingRoleIds }: { roles: string[] } =
           await getRolesForUser(user.discordId);
         const toRemove =

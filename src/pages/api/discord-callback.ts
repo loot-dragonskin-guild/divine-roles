@@ -58,17 +58,8 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
     profile.id
   );
   console.log("existingRoleIds", existingRoleIds);
-  const toRemove =
-    existingRoleIds?.filter((x) => !newRoleIds?.includes(x)) || [];
-  console.log("toRemove", toRemove);
   const toAdd = newRoleIds?.filter((x) => !existingRoleIds?.includes(x)) || [];
   console.log("toAdd", toAdd);
-  for (const roleId of toRemove) {
-    if (roleId == AdminRoleID) continue;
-    await new Promise((resolve) => setTimeout(resolve, 250));
-    console.log("Removing role for user", roleId, profile.id);
-    await removeRoleForUser(roleId, profile.id);
-  }
   for (const roleId of toAdd) {
     if (roleId == AdminRoleID) continue;
     await new Promise((resolve) => setTimeout(resolve, 250));

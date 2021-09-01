@@ -1,12 +1,12 @@
-import { useWallet } from '@gimmixorg/use-wallet';
-import getSignature from './getSignature';
-import { useStore } from './useStore';
+import { useWallet } from "@gimmixorg/use-wallet";
+import getSignature from "./getSignature";
+import { useStore } from "./useStore";
 
-export const SIGNATURE_TEXT = 'Click Sign to verify your Divine Role.';
+export const SIGNATURE_TEXT = "Click Sign to verify your Dragonskin.";
 
 const useSignature = () => {
   const { provider, account } = useWallet();
-  const signature = useStore(state => state.signature);
+  const signature = useStore((state) => state.signature);
 
   const promptSignature = async (): Promise<string | undefined> => {
     if (!provider || !account || signature != undefined) return;

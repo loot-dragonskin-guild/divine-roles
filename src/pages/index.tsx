@@ -1,9 +1,9 @@
-import React from 'react';
-import { useWallet } from '@gimmixorg/use-wallet';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import useSignature from '@app/features/useSignature';
-import Head from 'next/head';
-import Router from 'next/router';
+import React from "react";
+import { useWallet } from "@gimmixorg/use-wallet";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import useSignature from "@app/features/useSignature";
+import Head from "next/head";
+import Router from "next/router";
 
 const IndexPage = () => {
   const { connect, account } = useWallet();
@@ -15,10 +15,10 @@ const IndexPage = () => {
   return (
     <div className="index">
       <Head>
-        <title>Divine Roles</title>
+        <title>Dragon Guild</title>
       </Head>
-      <h1>Divine Roles</h1>
-      <div className="message">You must have Divine Robes to enter.</div>
+      <h1>Dragon Guild</h1>
+      <div className="message">You must have Dragonskin to enter.</div>
       {!account ? (
         <button
           onClick={() =>
@@ -27,23 +27,23 @@ const IndexPage = () => {
                 walletconnect: {
                   package: WalletConnectProvider,
                   options: {
-                    infuraId: 'b95f6330bfdd4f5d8960db9d1d3da676'
-                  }
-                }
+                    infuraId: "b95f6330bfdd4f5d8960db9d1d3da676",
+                  },
+                },
               },
-              theme: 'dark'
+              theme: "dark",
             })
           }
         >
           Connect Wallet
         </button>
       ) : (
-        <button onClick={verifyAndJoin}>Verify your Divine Role</button>
+        <button onClick={verifyAndJoin}>Verify your Dragonskin</button>
       )}
 
       <div className="links">
-        <a href="https://robes.market/" target="_blank">
-          Find Divine Robes for sale and check prices at robes.market.
+        <a href="https://dragons.market/" target="_blank">
+          Find Dragonskin for sale and check prices at dragons.market.
         </a>
       </div>
       <style jsx>{`

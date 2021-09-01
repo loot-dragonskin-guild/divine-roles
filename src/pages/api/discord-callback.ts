@@ -6,7 +6,6 @@ import {
   addRoleForUser,
   AdminRoleID,
   getRolesForUser,
-  removeRoleForUser,
   RolesToIDs,
 } from "@server/services/Discord";
 import { getBagsInWallet } from "loot-sdk";

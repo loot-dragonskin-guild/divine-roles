@@ -112,7 +112,7 @@ export const setRolesForUser = async (roles: string[], userID: string) => {
   ).then((res) => res.json());
 };
 export const addRoleForUser = async (roleId: string, userID: string) => {
-  await fetch(
+  const resp = await fetch(
     `https://discord.com/api/v8/guilds/${process.env.DISCORD_SERVER_ID}/members/${userID}/roles/${roleId}`,
     {
       method: "PUT",
@@ -122,6 +122,7 @@ export const addRoleForUser = async (roleId: string, userID: string) => {
       },
     }
   ).then((res) => res.text());
+  console.log(resp);
 };
 export const removeRoleForUser = async (roleId: string, userID: string) => {
   await fetch(

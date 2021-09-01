@@ -1,15 +1,15 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
 
 const IndexPage = () => {
   return (
     <div className="index">
       <Head>
-        <title>Divine Roles</title>
+        <title>Dragon Guild</title>
       </Head>
-      <h1>Divine Roles</h1>
+      <h1>Dragon Guild</h1>
       <div className="message">
-        Sorry, there's a dress code. (Divine Robe wearers only)
+        Sorry, there's a dress code. (Dragonskin wearers only)
       </div>
       <style jsx>{`
         .index {

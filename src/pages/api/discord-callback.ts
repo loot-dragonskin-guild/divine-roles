@@ -3,10 +3,15 @@ import {
   addToServer,
   getAccessToken,
   getProfile,
+  addRoleForUser,
+  AdminRoleID,
+  getRolesForUser,
+  removeRoleForUser,
+  RolesToIDs,
 } from "@server/services/Discord";
 import { getBagsInWallet } from "loot-sdk";
 import { NextApiRequest, NextApiResponse } from "next";
-import { bagFilterFunc } from "@utils/bagFilter";
+import { bagKeysToCheck, bagFilterFunc } from "@utils/bagFilter";
 
 const api = async (req: NextApiRequest, res: NextApiResponse) => {
   const { code, state }: { code?: string; state?: string } = req.query;
@@ -24,11 +29,48 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
   const filteredBags = bags.filter(bagFilterFunc);
   if (!filteredBags.length) return res.redirect("/unauthorized");
 
+  const itemsInBag = filteredBags.reduce((acc: Array<string>, bag) => {
+    bagKeysToCheck.map((key) => {
+      if (bag[key].toLowerCase().includes("dragon")) {
+        acc.push(bag[key]);
+      }
+    });
+    return acc;
+  }, []);
+  console.log(
+    `${user.username} ${user.address} has ${
+      filteredBags.length
+    } items: (${itemsInBag.join(", ")})`
+  );
   await prisma.user.update({
     where: { id: user.id },
-    data: { discordId: profile.id, inServer: true, username: profile.username },
+    data: {
+      discordId: profile.id,
+      inServer: true,
+      username: profile.username,
+      items: itemsInBag,
+    },
   });
   await addToServer(profile.id, accessToken);
+  const newRoleIds = [RolesToIDs["Ser Dragon of The Round Table"]];
+  const { roles: existingRoleIds }: { roles: string[] } = await getRolesForUser(
+    profile.id
+  );
+  const toRemove =
+    existingRoleIds?.filter((x) => !newRoleIds?.includes(x)) || [];
+  const toAdd = newRoleIds?.filter((x) => !existingRoleIds?.includes(x)) || [];
+  for (const roleId of toRemove) {
+    if (roleId == AdminRoleID) continue;
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    console.log("Removing role for user", roleId, profile.id);
+    await removeRoleForUser(roleId, profile.id);
+  }
+  for (const roleId of toAdd) {
+    if (roleId == AdminRoleID) continue;
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    console.log("Adding role for user", roleId, profile.id);
+    await addRoleForUser(roleId, profile.id);
+  }
   return res.redirect("/welcome");
 };
 

@@ -53,12 +53,16 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
   });
   await addToServer(profile.id, accessToken);
   const newRoleIds = [RolesToIDs["Ser Dragon of The Round Table"]];
+  console.log("newRoleIds", newRoleIds);
   const { roles: existingRoleIds }: { roles: string[] } = await getRolesForUser(
     profile.id
   );
+  console.log("existingRoleIds", existingRoleIds);
   const toRemove =
     existingRoleIds?.filter((x) => !newRoleIds?.includes(x)) || [];
+  console.log("toRemove", toRemove);
   const toAdd = newRoleIds?.filter((x) => !existingRoleIds?.includes(x)) || [];
+  console.log("toAdd", toAdd);
   for (const roleId of toRemove) {
     if (roleId == AdminRoleID) continue;
     await new Promise((resolve) => setTimeout(resolve, 250));

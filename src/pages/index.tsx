@@ -15,10 +15,10 @@ const IndexPage = () => {
   return (
     <div className="index">
       <Head>
-        <title>Dragon Guild</title>
+        <title>Katana Guild</title>
       </Head>
-      <h1>Dragon Guild</h1>
-      <div className="message">You must have Dragonskin to enter.</div>
+      <h1>Katana Guild</h1>
+      <div className="message">You must have Katana to enter.</div>
       {!account ? (
         <button
           onClick={() =>
@@ -38,12 +38,12 @@ const IndexPage = () => {
           Connect Wallet
         </button>
       ) : (
-        <button onClick={verifyAndJoin}>Verify your Dragonskin</button>
+        <button onClick={verifyAndJoin}>Verify your Katana</button>
       )}
 
       <div className="links">
-        <a href="https://dragons.market/" target="_blank">
-          Find Dragonskin for sale and check prices at dragons.market.
+        <a href="https://weeb.market/" target="_blank">
+          Find Katana for sale and check prices at weeb.market.
         </a>
       </div>
       <style jsx>{`

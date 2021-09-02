@@ -19,4 +19,4 @@ export const bagKeysToCheck: Array<BagKeysToCheck> = [
 ];
 
 export const bagFilterFunc = (bag: Bag) =>
-  bagKeysToCheck.map((key) => bag[key].toLowerCase().includes("dragon"));
+  bagKeysToCheck.map((key) => bag[key].toLowerCase().includes("katana"));

@@ -5,9 +5,9 @@ const IndexPage = () => {
   return (
     <div className="index">
       <Head>
-        <title>Dragon Guild</title>
+        <title>Katana Guild</title>
       </Head>
-      <h1>Dragon Guild</h1>
+      <h1>Katana Guild</h1>
       <div className="message">
         Welcome. You have been added to the Discord.
       </div>

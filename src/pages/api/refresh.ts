@@ -24,7 +24,7 @@ const api: NextApiHandler = async (_req, res) => {
     const filteredBags = bags.filter(bagFilterFunc);
     const itemsInBag = filteredBags.reduce((acc: Array<string>, bag) => {
       bagKeysToCheck.map((key) => {
-        if (bag[key].toLowerCase().includes("dragon")) {
+        if (bag[key].toLowerCase().includes("katana")) {
           acc.push(bag[key]);
         }
       });
@@ -56,7 +56,7 @@ const api: NextApiHandler = async (_req, res) => {
         },
       });
       if (user.discordId && user.inServer) {
-        const newRoleIds = [RolesToIDs["Ser Dragon of The Round Table"]];
+        const newRoleIds = [RolesToIDs["Ser Katana of The Round Table"]];
         const { roles: existingRoleIds }: { roles: string[] } =
           await getRolesForUser(user.discordId);
         const toRemove =

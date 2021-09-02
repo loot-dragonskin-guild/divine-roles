@@ -30,7 +30,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const itemsInBag = filteredBags.reduce((acc: Array<string>, bag) => {
     bagKeysToCheck.map((key) => {
-      if (bag[key].toLowerCase().includes("dragon")) {
+      if (bag[key].toLowerCase().includes("katana")) {
         acc.push(bag[key]);
       }
     });
@@ -51,7 +51,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
   await addToServer(profile.id, accessToken);
-  const newRoleIds = [RolesToIDs["Ser Dragon of The Round Table"]];
+  const newRoleIds = [RolesToIDs["Ser Katana of The Round Table"]];
   console.log("newRoleIds", newRoleIds);
   const { roles: existingRoleIds }: { roles: string[] } = await getRolesForUser(
     profile.id
